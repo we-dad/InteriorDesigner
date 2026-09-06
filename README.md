@@ -120,7 +120,7 @@ supporting independent designers. None of this was tested against real demand.
 The interesting engineering problems — a production crash from an empty portfolio
 array, the read-vs-write trade-off behind the chat data model, Sign in with Apple's
 one-time name delivery, and the image pipeline's compression-without-resizing bug —
-are documented in **[docs/CHALLENGES.md](docs/CHALLENGES.md)**.
+are documented in **[Challenges.md](Challenges.md)**.
 
 ## Roadmap
 
