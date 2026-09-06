@@ -43,38 +43,67 @@ Space Genie is a two-sided marketplace built specifically for interior design:
 
 ## Tech stack
 
-| Layer | Technology |
-|---|---|
-| **UI** | SwiftUI |
-| **Language** | Swift |
-| **Backend** | Firebase — Authentication, Firestore, Storage |
-| **AI** | OpenAI ChatGPT API |
-| **Design** | SF Pro typography, custom design system |
-| **Tooling** | Xcode, Git / GitHub |
+| Layer | Technology | Why |
+|---|---|---|
+| **UI** | SwiftUI | Declarative state kept three developers in sync and avoided storyboard merge conflicts |
+| **Language** | Swift | Required by the academy program; native target was iOS only |
+| **Backend** | Firebase (Auth, Firestore, Storage) | Real-time listeners out of the box — messaging shipped in days rather than weeks, with no backend to operate |
+| **Auth** | Firebase Auth + Sign in with Apple | Apple sign-in is mandatory for App Store review when third-party sign-in is offered |
+| **AI** | OpenAI `gpt-3.5-turbo` via Alamofire | The only option in mid-2023 with usable Arabic-language design Q&A |
+| **Tooling** | Xcode, Git / GitHub | |
 
 ## Architecture notes
+
+```mermaid
+graph TD
+    A[SwiftUI Views] --> B[ObservableObject ViewModels]
+    B --> C{Firebase Auth}
+    C -->|client| D[Client experience]
+    C -->|designer| E[Designer experience]
+    B --> F[(Firestore)]
+    B --> G[(Storage)]
+    F -.snapshot listeners.-> H[Real-time chat]
+    B --> I[OpenAI API]
+    I --> H
+```
 
 - **Declarative UI throughout.** The app is built entirely in SwiftUI — no UIKit view controllers — with state driven by observable view models.
 - **Firebase as the backend.** Authentication handles the client/designer account split; Firestore stores user profiles, designer portfolios, favorites, and chat threads; Storage holds portfolio imagery.
 - **Real-time messaging.** Chat threads use Firestore listeners so messages appear without a manual refresh.
 - **AI assistant as a chat participant.** The ChatGPT integration is surfaced inside the same messaging interface as human designers, so the interaction model stays consistent — the assistant is simply the first conversation in the list.
 - **Role-based experience.** A single app serves two user types; the profile, navigation, and available actions change depending on whether the signed-in account is a client or a designer.
+- **Messaging built on an open tutorial.** The chat module is adapted from Brian Voong's
+  *LBTASwiftUIFirebaseChat*, extended with media attachments and our designer profile
+  model. Original file headers are preserved in `FireBaseChat/`. The data model and its
+  trade-offs are documented in [docs/CHALLENGES.md](docs/CHALLENGES.md).
 - **Design system first.** Colors follow a 60/30/10 split, with a shared component set for buttons, input fields, icons, and avatars defined before feature work began — which kept the UI consistent across three developers.
 
-## Market positioning
+## Scope and outcome
+
+Space Genie shipped to the App Store in October 2023 and was validated with a closed
+test group at the academy. It never onboarded paying clients or designers — all
+accounts were test accounts, and the monetization model below was part of the
+program's business track rather than a launched business.
+
+What the project demonstrates technically: a two-sided SwiftUI app with role-based
+navigation, real-time Firestore messaging, Sign in with Apple, and an integrated LLM
+assistant — built by three developers in roughly six weeks.
+
+<details>
+<summary>Business positioning from the academy submission</summary>
 
 |  | Space Genie | Mostaql | Khamsat | Houzz |
 |---|---|---|---|---|
-| Available in Saudi Arabia | ✅ | ✅ | ✅ | ❌ |
-| Specialized in interior design | ✅ | ❌ | ❌ | ✅ |
-| AI features | ✅ | ❌ | ❌ | ❌ |
-| Commission | 5% | 20% | 20% | $65/month |
+| Available in Saudi Arabia | Yes | Yes | Yes | No |
+| Specialized in interior design | Yes | No | No | Yes |
+| AI features | Yes | No | No | No |
+| Proposed commission | 5% | 20% | 20% | $65/month |
 
-Space Genie is the only option that is both available in the Saudi market and purpose-built for interior design — at a fraction of the commission charged by general freelance platforms.
+The proposal positioned Space Genie as the only option both available in the Saudi
+market and purpose-built for interior design, with a Vision 2030 framing around
+supporting independent designers. None of this was tested against real demand.
 
-## Value proposition
-
-By supporting the growth of the interior design industry locally, the app helps create jobs for independent designers, raises service quality through transparent portfolios and ratings, and contributes to economic diversification under **Saudi Vision 2030**.
+</details>
 
 ## Timeline
 
@@ -82,9 +111,16 @@ By supporting the growth of the interior design industry locally, the app helps 
 |---|---|
 | May 2023 | Project start |
 | June 2023 | Version 1 |
-| October 2023 | Soft launch |
+| October 2023 | App Store release, closed testing |
 | December 2023 | Version 2 |
-| 2024 | Monetization |
+| 2024 | Monetization *(planned, never shipped)* |
+
+## Technical challenges
+
+The interesting engineering problems — a production crash from an empty portfolio
+array, the read-vs-write trade-off behind the chat data model, Sign in with Apple's
+one-time name delivery, and the image pipeline's compression-without-resizing bug —
+are documented in **[docs/CHALLENGES.md](docs/CHALLENGES.md)**.
 
 ## Roadmap
 
@@ -100,6 +136,13 @@ Built at the **Apple Developer Academy | TUWAIQ** in Riyadh.
 | Hajar Alruqi | CEO & Business Manager |
 | Wedad Almehmadi | Technology Manager |
 | Atheer Alshehri | Design & User Experience Manager |
+
+## My contribution
+
+Technology Manager and iOS developer. I owned the authentication and profile layer:
+Sign in with Apple and Firebase Auth, the dual-path signup flow for clients and
+designers, the designer profile editor, photo selection and upload to Firebase Storage
+with deletion, and the styles-and-fields taxonomy. See commits authored by `wee`.
 
 ## Getting started
 
