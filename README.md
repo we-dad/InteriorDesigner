@@ -8,6 +8,9 @@ An iOS app that connects property owners with professional interior designers in
 ![Platform](https://img.shields.io/badge/platform-iOS-lightgrey)
 ![Swift](https://img.shields.io/badge/Swift-SwiftUI-orange)
 ![Backend](https://img.shields.io/badge/backend-Firebase-yellow)
+![Status](https://img.shields.io/badge/status-archived-lightgrey)
+
+> **Project status — archived.** Space Genie was built and shipped to the App Store in 2023 as a team project at the Apple Developer Academy. It is no longer actively maintained: the Firebase project and API keys were deprovisioned after the program ended, so a fresh clone will build but won't connect to a live backend. The App Store listing and the source are kept here as a reference for the work.
 
 ---
 
@@ -109,9 +112,11 @@ open InteriorDesigner.xcodeproj
 **Requirements**
 
 - Xcode 14 or later
-- iOS 16 or later
-- A Firebase project with a `GoogleService-Info.plist` added to the app target
-- An OpenAI API key for the assistant feature
+- iOS 16.4 or later
+- A Firebase project with your own `GoogleService-Info.plist` added to the app target
+- Your own OpenAI API key for the assistant feature
+
+The original Firebase project and API keys are no longer active, so running the app against a live backend requires supplying your own credentials.
 
 ---
 
