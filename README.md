@@ -75,7 +75,7 @@ graph TD
 - **Messaging built on an open tutorial.** The chat module is adapted from Brian Voong's
   *LBTASwiftUIFirebaseChat*, extended with media attachments and our designer profile
   model. Original file headers are preserved in `FireBaseChat/`. The data model and its
-  trade-offs are documented in [CHALLENGES.md](CHALLENGES.md).
+  trade-offs are documented in [CHALLENGES.md](https://github.com/we-dad/InteriorDesigner/blob/86d43c96cede26fb42a481933f441dcf8b9d015c/Challenges.md).
 - **Design system first.** Colors follow a 60/30/10 split, with a shared component set for buttons, input fields, icons, and avatars defined before feature work began — which kept the UI consistent across three developers.
 
 ## Scope and outcome
