@@ -137,13 +137,6 @@ Built at the **Apple Developer Academy | TUWAIQ** in Riyadh.
 | Wedad Almehmadi | Technology Manager |
 | Atheer Alshehri | Design & User Experience Manager |
 
-## My contribution
-
-Technology Manager and iOS developer. I owned the authentication and profile layer:
-Sign in with Apple and Firebase Auth, the dual-path signup flow for clients and
-designers, the designer profile editor, photo selection and upload to Firebase Storage
-with deletion, and the styles-and-fields taxonomy. See commits authored by `wee`.
-
 ## Getting started
 
 ```bash
