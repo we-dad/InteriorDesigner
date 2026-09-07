@@ -14,10 +14,6 @@ An iOS app connecting property owners with interior designers in Saudi Arabia �
 ![Backend](https://img.shields.io/badge/backend-Firebase-yellow)
 ![Status](https://img.shields.io/badge/status-archived-lightgrey)
 
-<img src="images/home-feed.png" width="270" alt="Designer feed"/>
-<img src="images/designer-profile.png" width="270" alt="Designer profile"/>
-<img src="images/portfolio.png" width="270" alt="Portfolio"/>
-
 </div>
 
 > **Archived.** Space Genie was built and shipped to the App Store in 2023 at the Apple Developer Academy. It is no longer maintained: the Firebase project and API keys were deprovisioned when the program ended, so a fresh clone builds but won't reach a live backend. The App Store listing and the source are kept here as a record of the work.
@@ -38,17 +34,19 @@ A two-sided marketplace built specifically for interior design. Owners browse po
 
 ### Discovery
 
-<img src="images/home-feed.png" width="280" align="right" alt="Designer feed"/>
-
 A feed of designer profiles with cover images, style tags and ratings, filterable by project type — houses, cafés, restaurants — and searchable by name or design style.
 
 Tapping a designer opens a full profile: an about section, styles and fields, a gallery of past work, and a rating surfaced from client feedback.
 
-<br clear="right"/>
+<div align="center">
+  <img src="images/home-feed.png" width="215" alt="Designer feed"/>
+  <img src="images/designer-profile.png" width="215" alt="Designer profile"/>
+  <img src="images/portfolio.png" width="215" alt="Portfolio gallery"/>
+</div>
 
 ### Messaging, with the assistant as the first conversation
 
-<img src="images/chats.png" width="280" align="right" alt="Chat list"/>
+<img src="images/chats.png" width="200" align="right" alt="Chat list"/>
 
 Chat threads use Firestore listeners, so messages appear without a manual refresh.
 
@@ -58,11 +56,18 @@ The ChatGPT assistant sits in the same list as human designers — the first con
 
 ### Asking the assistant
 
-<img src="images/ai-assistant.gif" width="270" align="right" alt="Assistant answering a design question"/>
-
 Design questions — trends, colours, styles — get an answer in the same chat interface, streamed in as it arrives.
 
-<br clear="right"/>
+<div align="center">
+  <img src="images/ai-assistant.gif" width="230" alt="Assistant answering a design question"/>
+  <img src="images/ai-chat.png" width="230" alt="A finished conversation with the assistant"/>
+</div>
+
+## Full demo
+
+A complete walkthrough — onboarding, account creation, browsing designers, messaging, and the AI assistant.
+
+https://github.com/user-attachments/assets/454add25-cfee-44c2-aafb-5afbfb467772
 
 ## Tech stack
 
