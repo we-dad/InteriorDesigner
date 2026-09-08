@@ -121,7 +121,7 @@ The proposal positioned Space Genie as the only option both available in the Sau
 
 A production crash from an empty portfolio array, the read-versus-write trade-off behind the chat data model, Sign in with Apple's one-time name delivery, and an image pipeline that compressed without resizing:
 
-**[CHALLENGES.md](CHALLENGES.md)**
+**[docs/CHALLENGES.md](docs/CHALLENGES.md)**
 
 ## Team
 
