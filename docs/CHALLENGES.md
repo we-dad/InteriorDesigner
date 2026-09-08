@@ -2,8 +2,6 @@
 
 Problems encountered building Space Genie, and how they were resolved.
 
-> **On evidence.** The app shipped before any analytics were added, and the Firebase project was deprovisioned when the academy program ended, so there are no production metrics here. Rather than invent numbers, each entry cites the code or commit that documents the problem.
-
 ---
 
 ## 1. Crash on designer cards with an empty portfolio
