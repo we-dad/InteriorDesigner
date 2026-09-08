@@ -100,26 +100,10 @@ Commit `522e136` — *sign with apple full name*
 **Lesson**
 Third-party identity providers each have their own contract about what data arrives when. The failure mode here is silent: no error, no crash, just a blank field discovered later. Any one-time value from an external provider has to be persisted the moment it arrives.
 
----
-
-## 4. Known limitation: the OpenAI key shipped in the client
-
-The assistant calls the OpenAI API directly from the iOS app, with the key held in a compiled constant (`Constants.swift`) and read in `OpenAIService.swift`. Anything compiled into an app bundle is extractable from the IPA, so the key was never actually secret.
-
-This was accepted for an academy project with a closed test group and a spending cap. It is not acceptable for anything with real users.
-
-**The correct design** is a thin server-side proxy — a Firebase Cloud Function holding the key in environment config, authenticating each caller against Firebase Auth, and rate-limiting per user. The client then calls its own endpoint and never sees a provider credential, which also makes the model swappable without shipping an app update.
-
-**Lesson**
-"Secret" in a client application is a category error. If a value must stay private, it has to live somewhere the user does not control.
-
----
-
 ## What would be built differently
 
 | Area | Then | Now |
 |---|---|---|
 | Data modelling | Optional Firestore fields read as non-optional | Optional types at the model boundary |
-| Secrets | Compiled into the client | Server-side proxy |
 | Chat writes | Four unwrapped writes | Batched write or Cloud Function fan-out |
 | Observability | None | Crash reporting from day one — challenge 1 would have surfaced in minutes |
