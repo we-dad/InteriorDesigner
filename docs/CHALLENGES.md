@@ -2,8 +2,6 @@
 
 Problems encountered building Space Genie, and how they were resolved.
 
----
-
 ## 1. Crash on designer cards with an empty portfolio
 
 **Symptom**
@@ -104,47 +102,7 @@ Third-party identity providers each have their own contract about what data arri
 
 ---
 
-## 4. Merge conflicts from committed Xcode state files
-
-**Symptom**
-On 7 June the repository accumulated nine merge commits in a single day across three developers. A significant share of the conflicts were in files nobody had meaningfully edited.
-
-**Diagnosis**
-`UserInterfaceState.xcuserstate` was tracked in git. Xcode rewrites this binary file constantly — window positions, open tabs, scroll offsets — so it changes on every machine in every session, and being binary it can never auto-merge. The repository also had no `.gitignore` at all.
-
-**Fix**
-Untrack the file and stop committing per-developer Xcode state.
-
-**Lesson**
-A `.gitignore` is the first commit of a project, not a cleanup task. On a team of three, tooling noise consumed time that should have gone to features — and unlike a bug, that cost was invisible, because it never appeared as a defect.
-
----
-
-## 5. Portfolio images compressed but never resized
-
-**Symptom**
-Portfolio grids scrolled unevenly on older devices, and Storage usage grew faster than expected relative to the number of uploads.
-
-**Diagnosis**
-The upload path applies JPEG compression but leaves pixel dimensions untouched:
-
-```swift
-guard let uploadData = image.jpegData(compressionQuality: 0.5) else { return }
-```
-
-Source: `FirebaseManager.swift:37`
-
-A 12 MP iPhone photo drops from roughly 4 MB to 1 MB but remains 4032×3024 pixels. Those pixels are then decoded in full and downsampled at render time into a 327×154 card — and decode memory is driven by dimensions, not file size, so compression alone did nothing for scroll performance.
-
-**What would be different**
-Downsample to roughly twice the display size before upload, and store a separate thumbnail for feed cards while keeping the full-resolution original for the detail view. `ImageIO`'s `CGImageSourceCreateThumbnailAtIndex` does this without fully decoding the source.
-
-**Lesson**
-Compression and resizing solve different problems. File size affects bandwidth and storage cost; pixel dimensions affect decode memory and scroll performance. The first was reached for on the assumption that it addressed the second.
-
----
-
-## 6. Known limitation: the OpenAI key shipped in the client
+## 4. Known limitation: the OpenAI key shipped in the client
 
 The assistant calls the OpenAI API directly from the iOS app, with the key held in a compiled constant (`Constants.swift`) and read in `OpenAIService.swift`. Anything compiled into an app bundle is extractable from the IPA, so the key was never actually secret.
 
@@ -163,7 +121,5 @@ This was accepted for an academy project with a closed test group and a spending
 |---|---|---|
 | Data modelling | Optional Firestore fields read as non-optional | Optional types at the model boundary |
 | Secrets | Compiled into the client | Server-side proxy |
-| Images | Compressed only | Downsampled with separate thumbnails |
 | Chat writes | Four unwrapped writes | Batched write or Cloud Function fan-out |
-| Repo hygiene | No `.gitignore` | Ignore file in the first commit |
 | Observability | None | Crash reporting from day one — challenge 1 would have surfaced in minutes |
