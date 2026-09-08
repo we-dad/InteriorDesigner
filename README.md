@@ -39,9 +39,9 @@ A feed of designer profiles with cover images, style tags and ratings, filterabl
 Tapping a designer opens a full profile: an about section, styles and fields, a gallery of past work, and a rating surfaced from client feedback.
 
 <div align="center">
-  <img src="images/home-feed.png" width="220" alt="Designer feed"/>
-  <img src="images/designer-profile.png" width="220" alt="Designer profile"/>
-  <img src="images/portfolio.png" width="220" alt="Portfolio gallery"/>
+  <img src="images/home-feed.png" width="190" alt="Designer feed"/>
+  <img src="images/designer-profile.png" width="190" alt="Designer profile"/>
+  <img src="images/portfolio.png" width="190" alt="Portfolio gallery"/>
 </div>
 
 ### Messaging, with the assistant as the first conversation
@@ -51,7 +51,7 @@ Chat threads use Firestore listeners, so messages appear without a manual refres
 The ChatGPT assistant sits in the same list as human designers — the first conversation, marked Beta. It isn't a separate feature behind its own button; it's another correspondent. The interaction model stays identical whether the reply comes from a person or a model, which meant no second interface to design, build or explain.
 
 <div align="center">
-  <img src="images/chats.png" width="220" alt="Chat list"/>
+  <img src="images/chats.png" width="190" alt="Chat list"/>
 </div>
 
 ### Asking the assistant
@@ -59,8 +59,8 @@ The ChatGPT assistant sits in the same list as human designers — the first con
 Design questions — trends, colours, styles — get an answer in the same chat interface, streamed in as it arrives.
 
 <div align="center">
-  <img src="images/ai-assistant.gif" width="220" alt="Assistant answering a design question"/>
-  <img src="images/ai-chat.png" width="220" alt="A finished conversation with the assistant"/>
+  <img src="images/ai-assistant.gif" width="190" alt="Assistant answering a design question"/>
+  <img src="images/ai-chat.png" width="190" alt="A finished conversation with the assistant"/>
 </div>
 
 ## Full demo
